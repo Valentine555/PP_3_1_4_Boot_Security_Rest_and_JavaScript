@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Изменение пользователя</title>
+</head>
+<body>
+<div sec:authorize="hasRole('ADMIN')">
+    <form th:method="POST" th:action="@{/admin/edit}" th:object="${user}">
+        <input type="hidden" th:field="*{id}"/> <!-- Скрытое поле для ID пользователя -->
+        <label for="name">Введите имя:</label>
+        <input type="text" th:field="*{name}" id="name"/>
+        <br/>
+        <label for="surname">Введите фамилию:</label>
+        <input type="text" th:field="*{surname}" id="surname"/>
+        <br/>
+        <label for="year">Введите год рождения:</label>
+        <input type="text" th:field="*{year}" id="year"/>
+        <br/>
+        <label for="password">Введите новый пароль:</label>
+        <input type="password" th:field="*{password}" id="password"/>
+        <br/>
+        <label for="roles">Выберите роли:</label>
+        <select id="roles" th:field="*{roles}" multiple>
+            <option th:each="role : ${allRoles}"
+                    th:value="${role.id}"
+                    th:text="${role.name}">
+            </option>
+        </select>
+        <br/>
+        <input type="submit" value="Редактировать!">
+    </form>
+</div>
+</body>
+</html>

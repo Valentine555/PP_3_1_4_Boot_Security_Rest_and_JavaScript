@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>Пользователь</title>
+</head>
+<body>
+
+<!-- Проверка роли ADMIN -->
+<div sec:authorize="hasRole('ADMIN')">
+    <p th:text="${user.getName() + ', ' + user.getSurname() + ', ' + user.getYear()}">VALUE</p>
+
+    <form th:method="GET" th:action="@{/admin/edit}">
+        <input type="hidden" name="id" th:value="${user.id}"/>
+        <input type="submit" value="Изменить"/>
+    </form>
+
+    <form th:method="POST" th:action="@{/admin/delete}">
+        <input type="hidden" name="id" th:value="${user.id}"/>
+        <input type="submit" value="Удалить"/>
+    </form>
+</div>
+
+</body>
+</html>

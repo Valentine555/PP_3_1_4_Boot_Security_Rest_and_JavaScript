@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Меню администратора</title>
+</head>
+<body>
+<div sec:authorize="hasRole('ADMIN')">
+<div>
+    <h1>Меню администратора</h1>
+    <!-- Кнопка "Все пользователи" -->
+    <a th:href="@{/admin/users}">
+        Все пользователи
+    </a>
+    <br/>
+    <!-- Кнопка "Посмотреть свой профиль" -->
+    <a th:href="@{/user}">
+        Посмотреть свой профиль
+    </a>
+</div>
+</div>
+</body>
+</html>
