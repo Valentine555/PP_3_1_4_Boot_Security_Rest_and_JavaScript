@@ -7,7 +7,7 @@ import ru.kata.spring.boot_security.demo.models.User;
 import ru.kata.spring.boot_security.demo.services.RoleService;
 import ru.kata.spring.boot_security.demo.services.UserService;
 
-import java.util.List;
+
 
 @Controller
 @RequestMapping("/admin")
@@ -46,8 +46,6 @@ private final UserService userService;
 
     @GetMapping("/id")
     public String user(@RequestParam("id") int id, ModelMap model){
-        // получим одного человека по его id из сервиса
-        // и передадим этого человека на отображение в представление
         model.addAttribute("user", userService.findById(id));
         return "userforadmin";
     }
@@ -60,13 +58,14 @@ private final UserService userService;
     }
 
     @PostMapping("/edit")
-    public String update(@ModelAttribute("user") User user,  @RequestParam("password") String newPassword) {
+    public String update(@ModelAttribute("user") User user, @RequestParam("password") String newPassword) {
         if (newPassword == null || newPassword.isEmpty()) {
-            // Если пароль не введен, используем старый пароль
-            User user1 = userService.findById(user.getId());
-            user.setPassword(user1.getPassword());
+            User existingUser = userService.findById(user.getId());
+            user.setPassword(existingUser.getPassword());
         } else {
-        userService.save(user);}
+            user.setPassword(newPassword);
+        }
+        userService.save(user);
         return "redirect:/admin/users";
     }
 

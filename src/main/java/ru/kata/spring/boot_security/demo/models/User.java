@@ -9,6 +9,17 @@ import java.util.Set;
 @Table(name = "user")
 public class User {
 
+    public User() {
+    }
+
+    public User(String name, String surname, int year, String password, Set<Role> roles) {
+        this.name = name;
+        this.surname = surname;
+        this.year = year;
+        this.password = password;
+        this.roles = roles;
+    }
+
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,7 +37,7 @@ public class User {
     @Column(name = "password")
     private String password;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany
     @JoinTable(
             name = "user_roles",
             joinColumns = @JoinColumn(name = "user_id"),
