@@ -8,5 +8,6 @@ public interface UserServiceInt {
     List<User> findAll();
     User findById(int id);
     void deleteById(int id);
-    void save(User user);
+    void saveNew(User user);
+    void saveUpdate(User user, String newPassword);
 }

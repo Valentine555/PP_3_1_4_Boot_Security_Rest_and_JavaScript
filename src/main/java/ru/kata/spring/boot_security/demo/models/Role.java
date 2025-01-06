@@ -7,19 +7,15 @@ import org.springframework.security.core.GrantedAuthority;
 @Table(name = "role")
 public class Role implements GrantedAuthority {
 
-    public Role(String name) {
-        this.name = name;
-    }
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     private String name; //"ROLE_USER", "ROLE_ADMIN"
 
-    public Role() {
+    public Role() {}
 
-    }
+    public Role(String name) {this.name = name;}
 
     public Integer getId() {
         return id;
@@ -29,14 +25,11 @@ public class Role implements GrantedAuthority {
         this.id = id;
     }
 
-
     public void setName(String name) {
         this.name = name;
     }
 
-    public String getName() {
-        return name;
-    }
+    public String getName() {return name;}
 
     @Override
     public String getAuthority() {

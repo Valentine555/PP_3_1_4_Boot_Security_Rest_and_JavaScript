@@ -40,7 +40,7 @@ private final UserService userService;
 
     @PostMapping("/new")
     public String create(@ModelAttribute("user") User user) {
-        userService.save(user);
+        userService.saveNew(user);
         return "redirect:/admin/users";
     }
 
@@ -59,13 +59,7 @@ private final UserService userService;
 
     @PostMapping("/edit")
     public String update(@ModelAttribute("user") User user, @RequestParam("password") String newPassword) {
-        if (newPassword == null || newPassword.isEmpty()) {
-            User existingUser = userService.findById(user.getId());
-            user.setPassword(existingUser.getPassword());
-        } else {
-            user.setPassword(newPassword);
-        }
-        userService.save(user);
+        userService.saveUpdate(user, newPassword);
         return "redirect:/admin/users";
     }
 

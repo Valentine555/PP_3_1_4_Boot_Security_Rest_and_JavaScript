@@ -53,8 +53,20 @@ public User findByUserName (String name){
     }
 
     @Transactional
-    public void save(User user) {
+    public void saveNew(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
+        userRepository.save(user);
+    }
+
+    @Transactional
+    public void saveUpdate(User user, String newPassword) {
+            User existingUser = userRepository.findById(user.getId())
+                    .orElseThrow(() -> new RuntimeException("User not found"));
+            if (newPassword == null || newPassword.isEmpty()) {
+                user.setPassword(existingUser.getPassword());
+            } else {
+                user.setPassword(passwordEncoder.encode(newPassword));
+            }
         userRepository.save(user);
     }
 
