@@ -25,13 +25,13 @@ public class UserService implements UserDetailsService, UserServiceInt {
         this.passwordEncoder = passwordEncoder;
     }
 
-public User findByUserName (String name){
-        return userRepository.findByName(name);
+public User findByUserEmail(String email){
+    return userRepository.findByEmail(email);
 }
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user=findByUserName(username);
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        User user=userRepository.findByEmail(email);
         if (user==null){
             throw new UsernameNotFoundException("User not found");
         }

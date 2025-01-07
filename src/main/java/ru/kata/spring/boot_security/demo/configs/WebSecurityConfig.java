@@ -27,12 +27,12 @@ public class WebSecurityConfig {
         http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/", "/index", "/login").permitAll()
+                        .requestMatchers("/","/index", "login", "/static/**").permitAll()
                         .requestMatchers("/user").hasAnyRole("USER", "ADMIN")
-                        .requestMatchers("/admin/**").hasRole("ADMIN")
+                        .requestMatchers("/adminpanel").hasRole("ADMIN")
                         .anyRequest().authenticated()
                 )
-                .formLogin(form -> form
+                .formLogin(form -> form.loginPage("/login")
                         .successHandler(successUserHandler)
                         .permitAll()
                 )

@@ -23,6 +23,9 @@ public class User {
     @Column(name = "year")
     private int year;
 
+    @Column(name = "email")
+    private String email;
+
     @Column(name = "password")
     private String password;
 
@@ -37,12 +40,12 @@ public class User {
     public User() {
     }
 
-    public User(String name, String surname, int year, String password, Set<Role> roles) {
-        this.name = name;
-        this.surname = surname;
-        this.year = year;
-        this.password = password;
-        this.roles = roles;
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getPassword() {
@@ -93,5 +96,12 @@ public class User {
         this.year = year;
     }
 
-
+    public boolean hasRole(String role) {
+        for (Role r : roles) {
+            if (r.getName().equals(role)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

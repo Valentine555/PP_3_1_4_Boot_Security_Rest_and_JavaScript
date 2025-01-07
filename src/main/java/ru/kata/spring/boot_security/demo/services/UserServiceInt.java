@@ -4,7 +4,7 @@ import ru.kata.spring.boot_security.demo.models.User;
 import java.util.List;
 
 public interface UserServiceInt {
-    User findByUserName (String name);
+    User findByUserEmail(String name);
     List<User> findAll();
     User findById(int id);
     void deleteById(int id);
