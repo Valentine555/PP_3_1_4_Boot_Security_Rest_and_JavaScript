@@ -25,7 +25,7 @@
         </div>
         <div class="col-4 justify-content-lg-end">
             <form th:action="@{/logout}" method="post" class="d-grid gap-2 d-md-flex justify-content-md-end">
-                <button type="submit" class="btn fw-bold" style="color: dimgray;">logout</button>
+                <button type="submit" class="btn fw-bold" style="color: dimgray;">Logout</button>
             </form>
         </div>
     </div>
@@ -35,7 +35,7 @@
         <nav class="col-2 d-lg-block sidebar" style="padding-top: 15px; height: 100vh; overflow-y: auto;">
             <ul class="nav flex-column nav-pills">
                 <li class="nav-item v-100">
-                    <a th:if="${user.hasRole('ADMIN')}"
+                    <a th:if="${user.hasRole('ROLE_ADMIN')}"
                        class="nav-link active" aria-current="page" href="/adminpanel">
                         <div class="text-left">Admin</div>
                     </a>
@@ -244,7 +244,7 @@
                                                                            placeholder="surname" disabled><br>
 
                                                                     <label for="deleteYear"
-                                                                           class="form-label">Age</label>
+                                                                           class="form-label">Year</label>
                                                                     <input type="number" th:value="*{year}"
                                                                            class="form-control" id="deleteYear"
                                                                            th:name="year"
@@ -322,7 +322,7 @@
                                 </div>
 
                                 <div class="mb-3">
-                                    <label for="NewYear">Age</label>
+                                    <label for="NewYear">Year</label>
                                     <input id="NewYear" class="form-control w-25" aria-describedby="Enter the year"
                                            name="year" type="number" placeholder="Year" th:value="*{year}"/>
                                 </div>
