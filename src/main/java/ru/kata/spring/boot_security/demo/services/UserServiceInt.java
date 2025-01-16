@@ -9,5 +9,5 @@ public interface UserServiceInt {
     User findById(int id);
     void deleteById(int id);
     void saveNew(User user);
-    void saveUpdate(User user, String newPassword);
+    void saveUpdate(User user);
 }
